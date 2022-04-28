@@ -1,0 +1,5 @@
+2022-04-28 11:20:39,941 INFO [main] c.r.c.LoggerTest [StartupInfoLogger.java:55] Starting LoggerTest using Java 17.0.2 on Robin with PID 37128 (started by liyij in C:\Robin_Project\Community)
+2022-04-28 11:20:39,942 INFO [main] c.r.c.LoggerTest [SpringApplication.java:640] No active profile set, falling back to 1 default profile: "default"
+2022-04-28 11:20:40,970 INFO [main] o.s.b.a.w.s.WelcomePageHandlerMapping [WelcomePageHandlerMapping.java:57] Adding welcome page template: index
+2022-04-28 11:20:41,159 INFO [main] c.r.c.LoggerTest [StartupInfoLogger.java:61] Started LoggerTest in 1.437 seconds (JVM running for 1.94)
+2022-04-28 11:20:41,446 INFO [main] c.r.c.LoggerTest [LoggerTest.java:18] info log
