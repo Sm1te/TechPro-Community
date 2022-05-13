@@ -1,6 +1,8 @@
 package com.robin.community.service;
 
+import com.robin.community.dao.LoginTicketMapper;
 import com.robin.community.dao.UserMapper;
+import com.robin.community.entity.LoginTicket;
 import com.robin.community.entity.User;
 import com.robin.community.utility.CommunityConstant;
 import com.robin.community.utility.CommunityUtil;
@@ -25,11 +27,13 @@ public class UserService implements CommunityConstant {
     private MailClient mailClient;
     @Autowired
     private TemplateEngine templateEngine;
+
     @Value("${community.path.domain}")
     private String domain;
     @Value("${server.servlet.context-path}")
     private String contextPath;
-
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
     public User findUserById(int id){
         return userMapper.selectById(id);
     }
@@ -100,5 +104,53 @@ public class UserService implements CommunityConstant {
         }else{
             return ACTIVATION_FAILURE;
         }
+    }
+
+    public Map<String, Object> login(String username, String password, long expiredSeconds){
+        Map<String, Object> map = new HashMap<>();
+
+        // Null values
+        if(StringUtils.isBlank(username)){
+            map.put("usernameMsg", "Please enter your username!");
+            return map;
+        }
+        if(StringUtils.isBlank(password)){
+            map.put("passwordMsg", "Please enter your password!");
+            return map;
+        }
+
+        // Validate account
+        User user = userMapper.selectByName(username);
+        if(user == null){
+            map.put("usernameMsg", "Please enter your valid username!");
+            return map;
+        }
+
+        if(user.getStatus() == 0){
+            map.put("usernameMsg", "Please activate your account first!");
+            return map;
+        }
+
+        //Validate password
+        password = CommunityUtil.md5(password + user.getSalt());
+        if(!user.getPassword().equals(password)){
+            map.put("passwordMsg", "Wrong password!");
+            return map;
+        }
+
+        // Generate login ticket
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(user.getId());
+        loginTicket.setTicket(CommunityUtil.generateUUID());
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+        loginTicketMapper.insertLoginTicket(loginTicket);
+
+        map.put("ticket", loginTicket.getTicket());
+        return map;
+    }
+
+    public void logout(String ticket){
+        loginTicketMapper.updateStatus(ticket, 1);
     }
 }
