@@ -132,7 +132,7 @@ public class UserService implements CommunityConstant {
         }
 
         //Validate password
-        password = CommunityUtil.md5(password + user.getSalt());
+        //password = CommunityUtil.md5(password + user.getSalt());
         if(!user.getPassword().equals(password)){
             map.put("passwordMsg", "Wrong password!");
             return map;
@@ -152,5 +152,9 @@ public class UserService implements CommunityConstant {
 
     public void logout(String ticket){
         loginTicketMapper.updateStatus(ticket, 1);
+    }
+
+    public LoginTicket findLoginTicket(String ticket){
+        return loginTicketMapper.selectByTicket(ticket);
     }
 }
