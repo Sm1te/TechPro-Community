@@ -18,18 +18,18 @@ public class AlphaService {
 
 
     public AlphaService(){
-        System.out.println("实例化alphaservice");
+        System.out.println("实例化 alpha service");
     }
 
 
     @PostConstruct
     public void init(){
-        System.out.println("init alphaservice");
+        System.out.println("init alpha service");
     }
 
     @PreDestroy
     public void destory(){
-        System.out.println("销毁alphaservice");
+        System.out.println("销毁 alpha service");
     }
 
     public String find(){
