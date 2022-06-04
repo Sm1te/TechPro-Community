@@ -1,0 +1,16 @@
+2022-05-10 10:54:02,302 INFO [main] c.r.c.MapperTest [StartupInfoLogger.java:55] Starting MapperTest using Java 17.0.2 on Robin with PID 18152 (started by liyij in C:\Robin_Project\Community)
+2022-05-10 10:54:02,306 INFO [main] c.r.c.MapperTest [SpringApplication.java:640] No active profile set, falling back to 1 default profile: "default"
+2022-05-10 10:54:03,488 INFO [main] o.s.b.a.w.s.WelcomePageHandlerMapping [WelcomePageHandlerMapping.java:57] Adding welcome page template: index
+2022-05-10 10:54:03,663 INFO [main] c.r.c.MapperTest [StartupInfoLogger.java:61] Started MapperTest in 1.598 seconds (JVM running for 2.19)
+2022-05-10 10:54:04,029 INFO [main] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2022-05-10 10:54:04,160 INFO [main] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2022-05-10 10:54:04,223 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2022-05-10 10:54:04,229 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2022-05-10 10:57:24,258 INFO [main] c.r.c.MapperTest [StartupInfoLogger.java:55] Starting MapperTest using Java 17.0.2 on Robin with PID 35700 (started by liyij in C:\Robin_Project\Community)
+2022-05-10 10:57:24,259 INFO [main] c.r.c.MapperTest [SpringApplication.java:640] No active profile set, falling back to 1 default profile: "default"
+2022-05-10 10:57:25,416 INFO [main] o.s.b.a.w.s.WelcomePageHandlerMapping [WelcomePageHandlerMapping.java:57] Adding welcome page template: index
+2022-05-10 10:57:25,601 INFO [main] c.r.c.MapperTest [StartupInfoLogger.java:61] Started MapperTest in 1.556 seconds (JVM running for 2.095)
+2022-05-10 10:57:25,888 INFO [main] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2022-05-10 10:57:26,000 INFO [main] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2022-05-10 10:57:26,084 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2022-05-10 10:57:26,089 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
