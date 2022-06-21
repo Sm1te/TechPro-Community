@@ -5,17 +5,17 @@ import com.robin.community.entity.Page;
 import com.robin.community.entity.User;
 import com.robin.community.service.MessageService;
 import com.robin.community.service.UserService;
+import com.robin.community.utility.CommunityUtil;
 import com.robin.community.utility.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MessageController {
@@ -84,7 +84,26 @@ public class MessageController {
         // 私信目标
         model.addAttribute("target", getLetterUser(conversationId));
 
+        // 设置已读
+        List<Integer> ids = getLetterIds(letterList);
+        if(ids != null && !ids.isEmpty()){
+            messageService.readMessage(ids);
+        }
+
+
         return "/site/letter-detail";
+    }
+
+    private List<Integer> getLetterIds(List<Message> letterList){
+        List<Integer> letterIds = new ArrayList<>();
+        if(letterList != null){
+            for(Message message : letterList){
+                if(message.getToId() == hostHolder.getUser().getId() && message.getStatus() == 0){
+                    letterIds.add(message.getId());
+                }
+            }
+        }
+        return letterIds;
     }
 
     private User getLetterUser(String conversationId){
@@ -98,4 +117,29 @@ public class MessageController {
             return userService.findUserById(id0);
         }
     }
+
+    @PostMapping("/letter/send")
+    @ResponseBody
+    public String sendLetter(String toName, String content) {
+        User user = userService.findUserByName(toName);
+        if (user == null) {
+            return CommunityUtil.getJSONString(1, "用户不存在");
+        }
+
+        Message message = new Message();
+        message.setFromId(hostHolder.getUser().getId());
+        message.setToId(user.getId());
+        if(message.getFromId() < message.getToId()){
+            message.setConversationId(message.getFromId() + "_" + message.getToId());
+        }else{
+            message.setConversationId(message.getToId() + "_" + message.getFromId());
+        }
+
+        message.setContent(content);
+        message.setCreateTime(new Date());
+        messageService.addMessage(message);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
 }
