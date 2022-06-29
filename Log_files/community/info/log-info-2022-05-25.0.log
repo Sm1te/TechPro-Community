@@ -1,4 +1,0 @@
-2022-05-25 00:00:35,809 INFO [main] c.r.c.SensitiveTests [StartupInfoLogger.java:55] Starting SensitiveTests using Java 17.0.2 on Robin with PID 52348 (started by liyij in C:\Robin_Project\Community)
-2022-05-25 00:00:35,814 INFO [main] c.r.c.SensitiveTests [SpringApplication.java:640] No active profile set, falling back to 1 default profile: "default"
-2022-05-25 00:00:37,011 INFO [main] o.s.b.a.w.s.WelcomePageHandlerMapping [WelcomePageHandlerMapping.java:57] Adding welcome page template: index
-2022-05-25 00:00:37,206 INFO [main] c.r.c.SensitiveTests [StartupInfoLogger.java:61] Started SensitiveTests in 1.643 seconds (JVM running for 2.214)
