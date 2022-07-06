@@ -4,7 +4,9 @@ import com.robin.community.entity.DiscussPost;
 import com.robin.community.entity.Page;
 import com.robin.community.entity.User;
 import com.robin.community.service.DiscussPostService;
+import com.robin.community.service.LikeService;
 import com.robin.community.service.UserService;
+import com.robin.community.utility.CommunityConstant;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
     @Autowired
     private DiscussPostService discussPostService;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    LikeService likeService;
 
     @GetMapping("/index")
     public String getIndexPage(Model model, Page page){
@@ -39,6 +44,10 @@ public class HomeController {
                 map.put("post", post);
                 User userById = userService.findUserById(post.getUserId());
                 map.put("user", userById);
+
+                long likeCount = likeService.getLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
+
                 discussPosts.add(map);
             }
         }
