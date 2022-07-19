@@ -28,6 +28,7 @@ public class UserService implements CommunityConstant {
     @Autowired
     private TemplateEngine templateEngine;
 
+
     @Value("${community.path.domain}")
     private String domain;
     @Value("${server.servlet.context-path}")
