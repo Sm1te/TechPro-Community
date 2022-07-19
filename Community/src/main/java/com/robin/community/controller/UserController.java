@@ -2,6 +2,7 @@ package com.robin.community.controller;
 
 import com.robin.community.annotation.LoginRequired;
 import com.robin.community.entity.User;
+import com.robin.community.service.LikeService;
 import com.robin.community.service.UserService;
 import com.robin.community.utility.CommunityUtil;
 import com.robin.community.utility.HostHolder;
@@ -45,6 +46,9 @@ public class UserController {
 
     @Autowired
     private HostHolder hostHolder;
+
+    @Autowired
+    private LikeService likeService;
 
     @LoginRequired
     @GetMapping("/setting")
@@ -149,6 +153,20 @@ public class UserController {
         }
     }
 
+    // 个人主页
+    @GetMapping("/profile/{userId}")
+    public String getProfilePage(@PathVariable("userId") int userId, Model model){
+        User user = userService.findUserById(userId);
+        if(user == null){
+            throw new RuntimeException("该用户不存在");
+        }
+        // 用户
+        model.addAttribute("user", user);
+        // 点赞数量
+        int likeCount = likeService.findUserLikeCount(userId);
+        model.addAttribute("likeCount", likeCount);
 
+        return "/site/profile";
+    }
 
 }
